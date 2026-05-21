@@ -1,102 +1,34 @@
 # operator-stack
-**The reference implementation for Personal AI Architecture.**
+
+**Status:** v0.9 (Draft) · See [ROADMAP.md](./ROADMAP.md) and [CHANGELOG.md](./CHANGELOG.md)
 **Maintainer:** Timothy Shin · [thedimode.com](https://thedimode.com)
-**License:** MIT
+**License:** [MIT](./LICENSE)
 
----
+The reference implementation for [Personal AI Architecture](https://github.com/thedimode/personal-ai-architecture): nine prompts, file templates, skill schema, and hook examples for building your own portable AI operating system.
 
-This repository is the reference implementation of [Personal AI Architecture](https://github.com/thedimode/personal-ai-architecture). It contains the prompts, templates, schemas, and hook code an AI Operator needs to build their own stack from scratch.
+## The Personal AI Architecture project
 
-- **For the discipline's specification**, see [`thedimode/personal-ai-architecture`](https://github.com/thedimode/personal-ai-architecture).
-- **For the workbook that teaches the discipline**, see [thedimode.com/workbook](https://thedimode.com/workbook).
-- **For the maintainer's own running stack as a proof artifact**, see [`thedimode/thedimode`](https://github.com/thedimode/thedimode).
+- [thedimode/personal-ai-architecture](https://github.com/thedimode/personal-ai-architecture) — the specification
+- **thedimode/operator-stack** — reference implementation (this repo)
+- [thedimode/thedimode](https://github.com/thedimode/thedimode) — the maintainer's personal proof artifact
+- [thedimode.com/workbook](https://thedimode.com/workbook) — the workbook that teaches the discipline
 
-## What's inside
+## What this repository will contain
 
-```
-operator-stack/
-├── README.md                       (this file)
-├── LICENSE                         (MIT)
-├── CHANGELOG.md
-│
-├── prompts/                        Nine prompts, each as a standalone .md
-│   ├── 01-quick-profile-interview.md
-│   ├── 02-identity-loader.md
-│   ├── 03-voice-extraction-starter.md
-│   ├── 04-persona-synthesizer.md
-│   ├── 05-decisions-log-initializer.md
-│   ├── 06-current-state-template.md
-│   ├── 07-end-of-session-reflection.md
-│   ├── 08-morning-brief-generator.md
-│   └── 09-weekly-rollup-generator.md
-│
-├── templates/                      Empty file templates with frontmatter
-│   ├── profile.md.tmpl
-│   ├── persona_profile.md.tmpl
-│   ├── decisions.md.tmpl
-│   ├── current_state.md.tmpl
-│   └── session_log.md.tmpl
-│
-├── skills/                         Example skills following the schema
-│   ├── README.md
-│   ├── korean-document-quality/   (worked example)
-│   ├── decision-frame/            (worked example)
-│   └── memo-drafting/             (worked example)
-│
-├── hooks/                          Working hook code, MIT-licensed
-│   ├── README.md
-│   ├── session-briefing/          (loads identity at session start)
-│   ├── recall/                    (front-door vault retrieval)
-│   ├── fact-extractor/            (append-only fact capture)
-│   └── auto-doctor/               (deterministic state-drift checks)
-│
-├── schemas/                        Spec schemas as JSON Schema + examples
-│   ├── profile.schema.json
-│   ├── decisions.schema.json
-│   ├── current-state.schema.json
-│   ├── session-log.schema.json
-│   └── skill.schema.json
-│
-└── tests/                          Compliance test list
-    └── compliance.md
-```
+This repository is in active development. v0.9 is currently a placeholder; v0.10 ships the first end-to-end vertical slice (one prompt → one output file → one skill → one hook). See [ROADMAP.md](./ROADMAP.md) for the shipping schedule.
 
-## Dependencies on prior art
+When complete, this repository will provide:
 
-This implementation builds on, and stands alongside, work by several practitioners:
-
-- **Andrej Karpathy** — *Software 2.0* (2017) framed code-as-prompt as a real category. The prompts in this repo are not casual templates; they are versioned, named, output-typed artifacts.
-- **Geoffrey Litt** — local-first personal software, malleable software, "Stevens." The instinct that personal tools should be owned and editable by the user runs through every file in this repo.
-- **Simon Willison** — public agentic-engineering patterns, the LLM CLI tool, the model of practitioner-publisher who ships what they actually use.
-- **Khoj, Letta, mem0** — open and commercial memory-layer implementations. This toolkit is format-only and worker-facing; those projects are framework-and-product. We are complementary, not competing.
-
-Personal AI Architecture as a discipline is younger than these. The reference implementation in this repo is one way to instantiate it; other reference implementations are welcome.
-
-## Quick start
-
-If you've never built one of these before:
-
-```bash
-git clone https://github.com/thedimode/operator-stack
-cd operator-stack
-
-# 1. Copy a template into your AI working directory
-cp templates/profile.md.tmpl ~/Documents/MyAI/profile.md
-
-# 2. Open prompts/01-quick-profile-interview.md in your AI of choice
-#    (Claude, ChatGPT, Gemini — any will do)
-
-# 3. Paste the prompt. Answer the nine questions. Save the output
-#    as profile.md.
-
-# 4. Continue through prompts 02-09 over the following weeks.
-```
-
-Then read the workbook for the narrative. The toolkit is the code; the workbook is the build.
+- Nine copy-paste prompts with named outputs, vendor-agnostic
+- File templates conforming to the spec's schemas
+- Worked-example skills demonstrating the description-triggered loading pattern
+- Working hook examples covering session start, retrieval, fact capture, and drift detection
+- JSON Schema files for every spec-defined artifact
+- A compliance test list
 
 ## How this differs from a prompt library
 
-| Standard prompt library | This toolkit |
+| Standard prompt library | This toolkit (when complete) |
 |---|---|
 | Flat collection of prompts | Nine prompts in a defined sequence with named outputs |
 | Outputs are throwaway text | Outputs are durable markdown files on disk |
@@ -107,30 +39,42 @@ Then read the workbook for the narrative. The toolkit is the code; the workbook 
 
 If a prompt library is a recipe book, this is a kitchen.
 
+## Acknowledgments and prior art
+
+This implementation builds on, and stands in conversation with:
+
+- **Simon Willison** — the [LLM CLI tool](https://github.com/simonw/llm) and the model of practitioner-publisher who ships what they actually use. The "one runnable example in under five minutes" standard this toolkit aspires to is Willison's standard.
+- **Geoffrey Litt** — local-first personal software, malleable software, "Stevens." The instinct that personal tools should be owned and editable by the user runs through every file in this repo.
+- **Gordon Brander** ([Subconscious](https://subconscious.network)) — self-sovereign personal computing in the AI era.
+- **Andrej Karpathy** — public, reproducible, minimal reference implementations ([nanoGPT](https://github.com/karpathy/nanoGPT)). The "smallest readable version of the thing" standard.
+- **Khoj, Letta, Mem0** — open and commercial memory-layer implementations. This toolkit is complementary: format-only and worker-facing.
+
 ## Contributing
 
-Issues and PRs welcome. We accept:
+Issues and pull requests welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md). For security disclosures, see [SECURITY.md](./SECURITY.md).
 
-- Bug fixes to existing prompts (clarity, instruction following, output schema)
-- New worked-example skills (must follow `schemas/skill.schema.json`)
+When v0.10 ships, accepted contributions include:
+
+- Bug fixes to existing prompts (clarity, instruction following, output schema conformance)
+- New worked-example skills (must follow the spec's skill schema)
 - New worked-example hooks (must be vendor-agnostic and self-contained)
-- Translations of prompts into additional languages (Korean, Japanese, Mandarin, Spanish currently in scope)
+- Translations of prompts (Korean, Japanese, Mandarin, Spanish in scope)
 
-We do not accept:
+Not accepted:
 
-- Vendor-coupled implementations (no "ChatGPT only" or "Claude only" prompts)
-- Untested code in `hooks/`
+- Vendor-coupled implementations
+- Untested hook code
 - Skills without a worked example
 - Cosmetic-only PRs
 
 ## Versioning
 
-Semver. Pin to a tag. Pre-1.0 is draft; expect schema-breaking changes between minor versions until v1.0.0.
+Semantic versioning. Pin to a tag. Pre-1.0 is draft; expect schema-breaking changes between minor versions until v1.0.0.
 
 ## Status
 
-**v0.9 (Draft).** Open for forking and citation. Issues welcome. v1.0 ships when schemas reach RC and the workbook ships v2.
+**v0.9 (Draft).** Repository scaffolding only. v0.10 ships the first vertical slice.
 
 ---
 
-*If you build with this, tell us. We're keeping a public list of compliant implementations at the maintainer's discretion.*
+Maintained by Timothy Shin.
