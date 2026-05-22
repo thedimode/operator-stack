@@ -11,7 +11,7 @@ The reference implementation for [Personal AI Architecture](https://github.com/t
 - [thedimode/personal-ai-architecture](https://github.com/thedimode/personal-ai-architecture) — the specification
 - **thedimode/operator-stack** — reference implementation (this repo)
 - [thedimode/thedimode](https://github.com/thedimode/thedimode) — the maintainer's personal proof artifact
-- [thedimode.com/workbook](https://thedimode.com/workbook) — the workbook that teaches the discipline
+- [thedimode.com/handbook](https://thedimode.com/handbook) — the handbook that teaches the discipline
 
 ## What this repository will contain
 
